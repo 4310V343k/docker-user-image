@@ -1,12 +1,6 @@
 #!/usr/bin/env sh
 set -euf
 
-# This image cannot be run with the --user flag
-if [ "$(id -u)" -ne 0 ]; then
-    echo "ERROR: This image should not be run with the --user Docker flag. Exiting..."
-    exit 1
-fi
-
 # Set the timezone if specified
 if [ -n "${TZ:-}" ]; then
     if [ -f /etc/localtime ] && [ "$(stat -c "%d" "$(readlink -f /etc/localtime)")" -ne "$(stat -c "%d" /)" ]; then
